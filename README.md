@@ -100,6 +100,7 @@ use \PDFShift\PDFShift;
 
 PDFShift::setApiKey('120d8e8a86d2....................');
 
+// We use an instance of PDFShift instead of the ::convertTo to easily handle advanced configuration
 $pdfshift = new PDFShift();
 $pdfshift->setHTTPHeaders(['X-Original-Header' => 'Awesome value']);
 $pdfshift->addHTTPHeader('user-agent', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0'); // Also works like this
@@ -115,7 +116,7 @@ use \PDFShift\PDFShift;
 
 PDFShift::setApiKey('120d8e8a86d2....................');
 
-// We use .prepare() instead of .convert for easily handle advanced configuration
+// We use an instance of PDFShift instead of the ::convertTo to easily handle advanced configuration
 $pdfshift = new PDFShift();
 $pdfshift->auth('user', 'passwd');
 $pdfshift->convert('https://httpbin.org/basic-auth/user/passwd');
@@ -130,7 +131,7 @@ use \PDFShift\PDFShift;
 
 PDFShift::setApiKey('120d8e8a86d2....................');
 
-// We use .prepare() instead of .convert for easily handle advanced configuration
+// We use an instance of PDFShift instead of the ::convertTo to easily handle advanced configuration
 $pdfshift = new PDFShift();
 $pdfshift->addCookie('session', '4cb496a8-a3eb-4a7e-a704-f993cb6a4dac');
 $pdfshift->convert('https://httpbin.org/cookies');
@@ -145,7 +146,7 @@ use \PDFShift\PDFShift;
 
 PDFShift::setApiKey('120d8e8a86d2....................');
 
-// We use .prepare() instead of .convert for easily handle advanced configuration
+// We use an instance of PDFShift instead of the ::convertTo to easily handle advanced configuration
 $pdfshift = new PDFShift();
 $pdfshift->watermark([
     'source' => 'https://pdfshift.io/static/static/img/logo.png',
@@ -166,7 +167,7 @@ use \PDFShift\PDFShift;
 
 PDFShift::setApiKey('120d8e8a86d2....................');
 
-// We use .prepare() instead of .convert for easily handle advanced configuration
+// We use an instance of PDFShift instead of the ::convertTo to easily handle advanced configuration
 $pdfshift = new PDFShift();
 $pdfshift->setFooter('<div>Page {{page}} of {{total}}</div>', '50px');
 $pdfshift->convert('https://www.example.com');
@@ -181,7 +182,7 @@ use \PDFShift\PDFShift;
 
 PDFShift::setApiKey('120d8e8a86d2....................');
 
-// We use .prepare() instead of .convert for easily handle advanced configuration
+// We use an instance of PDFShift instead of the ::convertTo to easily handle advanced configuration
 $pdfshift = new PDFShift();
 $pdfshift->protect([
     'encrypt' => 128,

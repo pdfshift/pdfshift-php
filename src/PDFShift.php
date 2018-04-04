@@ -40,7 +40,7 @@ class PDFShift
     private static $_apiKey = null;
 
     // @var string The base URL for the PDFShift API.
-    private static $_apiBase = 'http://127.0.0.1:5000/v2';
+    private static $_apiBase = 'https://api.pdfshift.io/v2';
 
     /**
      * Returns the current api key
