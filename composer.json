@@ -1,0 +1,22 @@
+{
+    "name": "pdfshift/pdfshift-php",
+    "description": "Convert HTML documents to PDF using the PDFShift.io API.",
+    "keywords": ["html", "pdf", "api", "pdfshift", "convert", "document"],
+    "homepage": "https://github.com/pdfshift/pdfshift-php",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Cyril Nicodeme",
+            "email": "contact@pdfshift.io",
+            "homepage": "https://pdfshift.io",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php" : ">=5.3.0",
+        "guzzlehttp/guzzle": "~6.3.2"
+    },
+    "autoload": {
+        "psr-4": { "PDFShift\\" : "src/" }
+    }
+}
