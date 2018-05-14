@@ -97,14 +97,18 @@ class PDFShift
         }
 
         $client = new \GuzzleHttp\Client();
-        $res = $client->request(
+        $response = $client->request(
             'GET', self::$_apiBase.'/credits/', [
                 'http_errors' => false,
                 'auth' => [self::$_apiKey, 'pass']
             ]
         );
 
-        return self::_parseResponse($res);
+        if ($response->getStatusCode() === 200) {
+            return json_decode($response->getBody(), true);
+        }
+
+        return self::_handleError($response);
     }
 
     /**
@@ -114,7 +118,7 @@ class PDFShift
      *
      * @return null
      */
-    private static function _parseResponse($response)
+    private static function _handleError($response)
     {
         $body = json_decode($response->getBody(), true);
         if (is_null($body)) {
@@ -124,27 +128,23 @@ class PDFShift
             );
         }
 
-        if ($response->getStatusCode() === 200) {
-            return $body;
-        }
-
         switch ($response->getStatusCode()) {
-        case 400:
-            if (!empty($body['message'])) {
-                throw new Exceptions\InvalidRequestException($body['message'], $body);
-            }
-            reset($body['errors']);
-            $key = key($body['errors']);
-            $message = $key.' : '.$body['errors'][$key];
-            throw new Exceptions\InvalidRequestException($message, $body);
-        case 401:
-            throw new Exceptions\InvalidApiKeyException($body);
-        case 403:
-            throw new Exceptions\NoCreditsException($body);
-        case 429:
-            throw new Exceptions\RateLimitException($body);
-        default:
-            throw new Exceptions\ServerException($body);
+            case 400:
+                if (!empty($body['message'])) {
+                    throw new Exceptions\InvalidRequestException($body['message'], $body);
+                }
+                reset($body['errors']);
+                $key = key($body['errors']);
+                $message = $key.' : '.$body['errors'][$key];
+                throw new Exceptions\InvalidRequestException($message, $body);
+            case 401:
+                throw new Exceptions\InvalidApiKeyException($body);
+            case 403:
+                throw new Exceptions\NoCreditsException($body);
+            case 429:
+                throw new Exceptions\RateLimitException($body);
+            default:
+                throw new Exceptions\ServerException($body);
         }
     }
 
@@ -410,9 +410,12 @@ class PDFShift
             ]
         );
 
-        $body = self::_parseResponse($response);
-        $this->data = base64_decode($body['content']);
-        return null;
+        if ($response->getStatusCode() === 200) {
+            $this->data = $response->getBody();
+            return null;
+        }
+
+        return self::_handleError($response);
     }
 
     /**
@@ -437,7 +440,7 @@ class PDFShift
     public function save($filepath)
     {
         if (is_null($this->getData())) {
-            throw new Exceptions\PDFShiftException();
+            throw new Exceptions\PDFShiftException('A fatal error occured while trying to save the file to disk.', 500);
         }
 
         return file_put_contents($filepath, $this->getData());
