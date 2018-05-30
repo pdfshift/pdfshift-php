@@ -149,11 +149,10 @@ PDFShift::setApiKey('120d8e8a86d2....................');
 // We use an instance of PDFShift instead of the ::convertTo to easily handle advanced configuration
 $pdfshift = new PDFShift();
 $pdfshift->watermark([
-    'source' => 'https://pdfshift.io/static/static/img/logo.png',
+    'image' => 'https://pdfshift.io/static/img/logo.png',
     'offsetX' => 50,
     'offsetY' => '100px',
-    'rotate' => 45,
-    'background' => true
+    'rotate' => 45
 ])
 $pdfshift->convert('https://www.example.com');
 $pdfshift->save('result.pdf');
@@ -185,7 +184,6 @@ PDFShift::setApiKey('120d8e8a86d2....................');
 // We use an instance of PDFShift instead of the ::convertTo to easily handle advanced configuration
 $pdfshift = new PDFShift();
 $pdfshift->protect([
-    'encrypt' => 128,
     'userPassword' => 'user',
     'ownerPassword' => 'owner',
     'noPrint' => true
