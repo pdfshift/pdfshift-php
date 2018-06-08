@@ -324,26 +324,26 @@ class PDFShift
      * Define the content that will be on the top of all pages
      *
      * @param string $source The content, can be either an URL or raw HTML data.
-     * @param string $margin The space between the top and the start of the document.
+     * @param string $spacing The space between the top and the start of the document.
      *
      * @return null
      */
-    public function setHeader($source, $margin = null)
+    public function setHeader($source, $spacing = null)
     {
-        $this->_options['footer'] = ['source' => $source, 'margin' => $margin];
+        $this->_options['footer'] = ['source' => $source, 'spacing' => $spacing];
     }
 
     /**
      * Define the content that will be on the bottom of all pages
      *
      * @param string $source The content, can be either an URL or raw HTML data.
-     * @param string $margin The space between the end of the document and the bottom
+     * @param string $spacing The space between the end of the document and the bottom
      *
      * @return null
      */
-    public function setFooter($source, $margin = null)
+    public function setFooter($source, $spacing = null)
     {
-        $this->_options['footer'] = ['source' => $source, 'margin' => $margin];
+        $this->_options['footer'] = ['source' => $source, 'spacing' => $spacing];
     }
 
     /**
