@@ -330,7 +330,7 @@ class PDFShift
      */
     public function setHeader($source, $spacing = null)
     {
-        $this->_options['footer'] = ['source' => $source, 'spacing' => $spacing];
+        $this->_options['header'] = ['source' => $source, 'spacing' => $spacing];
     }
 
     /**
@@ -357,7 +357,6 @@ class PDFShift
     public function protect($options)
     {
         $this->_options['protection'] = [
-            'encryption'     => (isset($options['encryption']) ? $options['encryption'] : null),
             'author'         => (isset($options['author']) ? $options['author'] : null),
             'user_password'  => (isset($options['userPassword']) ? $options['userPassword'] : null),
             'owner_password' => (isset($options['ownerPassword']) ? $options['ownerPassword'] : null),
