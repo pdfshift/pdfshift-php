@@ -16,7 +16,7 @@
  * @package  PDFShift
  * @author   Cyril Nicodeme <contact@pdfshift.io>
  * @license  https://opensource.org/licenses/MIT MIT
- * @version  1.0.0
+ * @version  1.0.2
  * @link     https://pdfshift.io
  */
 
@@ -36,6 +36,10 @@ use PDFShift\Exceptions;
  */
 class PDFShift
 {
+    const WATERMARK_TEXT = 1;
+    const WATERMARK_IMAGE = 2;
+    const WATERMARK_PDF = 3;
+
     // @var string The PDFShift API key to be used for requests.
     private static $_apiKey = null;
 
@@ -369,20 +373,13 @@ class PDFShift
     /**
      * Add a watermark to the document.
      *
-     * @param string $source  The content, can be either an URL or raw HTML data.
-     * @param array  $options A set of options
+     * @param array  $options A set of options, including either "image", "text" or "source"
      *
      * @return null
      */
-    public function watermark($source, $options)
+    public function watermark($options)
     {
-        $this->_options['watermark'] = [
-            'source'     => $source,
-            'offset_x'   => (isset($options['offsetX']) ? $options['offsetX'] : null),
-            'offset_y'   => (isset($options['offsetY']) ? $options['offsetY'] : null),
-            'rotate'     => (isset($options['rotate']) ? $options['rotate'] : null),
-            'background' => (isset($options['background']) ? $options['background'] : null)
-        ];
+        $this->_options['watermark'] = $options;
     }
 
     /**
