@@ -1,4 +1,4 @@
 <?php
 // PDFShift singleton
 
-require(dirname(__FILE__) . '/lib/PDFShift.php');
+require(dirname(__FILE__) . '/src/PDFShift.php');
