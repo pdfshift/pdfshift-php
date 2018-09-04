@@ -16,7 +16,7 @@
  * @package  PDFShift
  * @author   Cyril Nicodeme <contact@pdfshift.io>
  * @license  https://opensource.org/licenses/MIT MIT
- * @version  1.0.2
+ * @version  1.0.3
  * @link     https://pdfshift.io
  */
 
@@ -31,7 +31,7 @@ use PDFShift\Exceptions;
  * @package  PDFShift
  * @author   Cyril Nicodeme <contact@pdfshift.io>
  * @license  https://opensource.org/licenses/MIT MIT
- * @version  Release: 1.0.0
+ * @version  Release: 1.0.2
  * @link     https://pdfshift.io
  */
 class PDFShift
@@ -139,7 +139,7 @@ class PDFShift
                 }
                 reset($body['errors']);
                 $key = key($body['errors']);
-                $message = $key.' : '.$body['errors'][$key];
+                $message = $key.' : '.$body['errors'][$key][0];
                 throw new Exceptions\InvalidRequestException($message, $body);
             case 401:
                 throw new Exceptions\InvalidApiKeyException($body);
