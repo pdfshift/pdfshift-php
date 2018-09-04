@@ -16,7 +16,7 @@
  * @package  PDFShift
  * @author   Cyril Nicodeme <contact@pdfshift.io>
  * @license  https://opensource.org/licenses/MIT MIT
- * @version  1.0.3
+ * @version  1.0.4
  * @link     https://pdfshift.io
  */
 
