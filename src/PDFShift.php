@@ -137,6 +137,11 @@ class PDFShift
                 if (!empty($body['message'])) {
                     throw new Exceptions\InvalidRequestException($body['message'], $body);
                 }
+                
+                if (isset($body['error']) && is_string($body['error'])) {
+                    throw new Exceptions\InvalidRequestException($body['error'], $body);
+                }
+                
                 reset($body['errors']);
                 $key = key($body['errors']);
                 $message = $key.' : '.$body['errors'][$key][0];
