@@ -38,7 +38,7 @@ This library needs to be configured with your `api_key` received when creating a
 Setting it is easy as:
 
 ```php
-PDFShift::setApiKey('120d8e8a86d2....................');
+\PDFShift\PDFShift::setApiKey('120d8e8a86d2....................');
 ```
 
 

@@ -100,31 +100,34 @@ class PDFShift
             throw new Exceptions\InvalidApiKeyException();
         }
 
-        $client = new \GuzzleHttp\Client();
-        $response = $client->request(
-            'GET', self::$_apiBase.'/credits/', [
-                'http_errors' => false,
-                'auth' => [self::$_apiKey, 'pass']
-            ]
-        );
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => self::$_apiBase.'/credits/',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_USERPWD => self::$_apiKey.':'
+        ));
+        $response = curl_exec($curl);
+        $error = curl_error($curl);
+        $statusCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        curl_close($curl);
 
-        if ($response->getStatusCode() === 200) {
-            return json_decode($response->getBody(), true);
+        if ($statusCode === 200) {
+            return json_decode($response, true);
         }
 
-        return self::_handleError($response);
+        return self::_handleError($response, $statusCode);
     }
 
     /**
      * Process the response from the server and act accordingly
      *
-     * @param array $response The response from Guzzle
+     * @param array $response The response from cURL
      *
      * @return null
      */
-    private static function _handleError($response)
+    private static function _handleError($response, $statusCode)
     {
-        $body = json_decode($response->getBody(), true);
+        $body = json_decode($response, true);
         if (is_null($body)) {
             throw new Exceptions\PDFShiftException(
                 'Invalid response from the server.',
@@ -132,11 +135,16 @@ class PDFShift
             );
         }
 
-        switch ($response->getStatusCode()) {
+        switch ($statusCode) {
             case 400:
                 if (!empty($body['message'])) {
                     throw new Exceptions\InvalidRequestException($body['message'], $body);
                 }
+
+                if (isset($body['error']) && is_string($body['error'])) {
+                    throw new Exceptions\InvalidRequestException($body['error'], $body);
+                }
+
                 reset($body['errors']);
                 $key = key($body['errors']);
                 $message = $key.' : '.$body['errors'][$key][0];
@@ -395,23 +403,35 @@ class PDFShift
     public function convert($source)
     {
         $this->_options['source'] = $source;
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => self::$_apiBase.'/convert/',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => json_encode($this->_options),
+            CURLOPT_HTTPHEADER => array('Content-Type:application/json'),
+            CURLOPT_USERPWD => self::$_apiKey.':'
+        ));
+        $response = curl_exec($curl);
+        $error = curl_error($curl);
+        $statusCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        curl_close($curl);
 
-        $client = new \GuzzleHttp\Client();
-        $response = $client->post(
-            self::$_apiBase.'/convert/',
-            [
-                'auth' => [self::$_apiKey, 'pass'],
-                'http_errors' => false,
-                \GuzzleHttp\RequestOptions::JSON => $this->_options
-            ]
-        );
 
-        if ($response->getStatusCode() === 200) {
-            $this->data = $response->getBody();
+        if ($statusCode === 200) {
+            if (isset($this->_options['filename'])) {
+                /** 
+                 * "filename" will save the resulting PDF to Amazon S3 for 2 days,
+                 * and will return a JSON response
+                 */
+                $this->data = json_decode($response, true);
+            } else {
+                $this->data = $response;
+            }
             return null;
         }
 
-        return self::_handleError($response);
+        return self::_handleError($response, $statusCode);
     }
 
     /**
