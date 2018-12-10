@@ -10,7 +10,7 @@
  * ________\/\\\_____________\/\\\\\\\\\\\\/___\/\\\___________\///\\\\\\\\\\\/___\/\\\___\/\\\_\/\\\____\/\\\________\//\\\\\____
  * _________\///______________\////////////_____\///______________\///////////_____\///____\///__\///_____\///__________\/////____
  *
- * PHP version 5
+ * Wrapper around the PDFShift API
  *
  * @category API
  * @package  PDFShift
@@ -24,16 +24,6 @@ namespace PDFShift;
 
 use PDFShift\Exceptions;
 
-/**
- * Wrapper around the PDFShift API
- *
- * @category API
- * @package  PDFShift
- * @author   Cyril Nicodeme <contact@pdfshift.io>
- * @license  https://opensource.org/licenses/MIT MIT
- * @version  Release: 1.0.2
- * @link     https://pdfshift.io
- */
 class PDFShift
 {
     const WATERMARK_TEXT = 1;
@@ -273,7 +263,7 @@ class PDFShift
             $this->_options['cookies'] = array();
         }
 
-        $this->_options['cookies'][0] = [
+        $this->_options['cookies'][] = [
             'name' => $name,
             'value' => $value,
             'secure' => $secure,

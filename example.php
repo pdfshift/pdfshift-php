@@ -3,7 +3,7 @@
 require_once('vendor/autoload.php');
 use \PDFShift\PDFShift;
 
-PDFShift::setApiKey('120d8e8a86d2....................');
+PDFShift::setApiKey('your_api_key');
 
 $pdfshift = new PDFShift();
 $pdfshift->setHTTPHeaders([

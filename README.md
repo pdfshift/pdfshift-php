@@ -38,7 +38,7 @@ This library needs to be configured with your `api_key` received when creating a
 Setting it is easy as:
 
 ```php
-\PDFShift\PDFShift::setApiKey('120d8e8a86d2....................');
+\PDFShift\PDFShift::setApiKey('your_api_key');
 ```
 
 
@@ -50,7 +50,7 @@ Setting it is easy as:
 require_once('vendor/autoload.php');
 use \PDFShift\PDFShift;
 
-PDFShift::setApiKey('120d8e8a86d2....................');
+PDFShift::setApiKey('your_api_key');
 PDFShift::convertTo('https://www.example.com', null, 'result.pdf');
 ```
 
@@ -60,7 +60,7 @@ PDFShift::convertTo('https://www.example.com', null, 'result.pdf');
 require_once('vendor/autoload.php');
 use \PDFShift\PDFShift;
 
-PDFShift::setApiKey('120d8e8a86d2....................');
+PDFShift::setApiKey('your_api_key');
 
 $data = file_get_content('invoice.html');
 PDFShift::convertTo(data, null, 'result.pdf');
@@ -74,7 +74,7 @@ PDFShift::convertTo(data, null, 'result.pdf');
 require_once('vendor/autoload.php');
 use \PDFShift\PDFShift;
 
-PDFShift::setApiKey('120d8e8a86d2....................');
+PDFShift::setApiKey('your_api_key');
 
 $data = file_get_content('invoice.html');
 PDFShift::convertTo(data, ['css' => 'https://www.example.com/public/css/print.css'], 'result.pdf');
@@ -86,7 +86,7 @@ PDFShift::convertTo(data, ['css' => 'https://www.example.com/public/css/print.cs
 require_once('vendor/autoload.php');
 use \PDFShift\PDFShift;
 
-PDFShift::setApiKey('120d8e8a86d2....................');
+PDFShift::setApiKey('your_api_key');
 
 $data = file_get_content('invoice.html');
 PDFShift::convertTo(data, ['css' => 'a {text-decoration: underline; color: blue}'], 'result.pdf');
@@ -98,7 +98,7 @@ PDFShift::convertTo(data, ['css' => 'a {text-decoration: underline; color: blue}
 require_once('vendor/autoload.php');
 use \PDFShift\PDFShift;
 
-PDFShift::setApiKey('120d8e8a86d2....................');
+PDFShift::setApiKey('your_api_key');
 
 // We use an instance of PDFShift instead of the ::convertTo to easily handle advanced configuration
 $pdfshift = new PDFShift();
@@ -114,7 +114,7 @@ $pdfshift->save('result.pdf');
 require_once('vendor/autoload.php');
 use \PDFShift\PDFShift;
 
-PDFShift::setApiKey('120d8e8a86d2....................');
+PDFShift::setApiKey('your_api_key');
 
 // We use an instance of PDFShift instead of the ::convertTo to easily handle advanced configuration
 $pdfshift = new PDFShift();
@@ -129,7 +129,7 @@ $pdfshift->save('result.pdf');
 require_once('vendor/autoload.php');
 use \PDFShift\PDFShift;
 
-PDFShift::setApiKey('120d8e8a86d2....................');
+PDFShift::setApiKey('your_api_key');
 
 // We use an instance of PDFShift instead of the ::convertTo to easily handle advanced configuration
 $pdfshift = new PDFShift();
@@ -144,7 +144,7 @@ $pdfshift->save('result.pdf');
 require_once('vendor/autoload.php');
 use \PDFShift\PDFShift;
 
-PDFShift::setApiKey('120d8e8a86d2....................');
+PDFShift::setApiKey('your_api_key');
 
 // We use an instance of PDFShift instead of the ::convertTo to easily handle advanced configuration
 $pdfshift = new PDFShift();
@@ -164,7 +164,7 @@ $pdfshift->save('result.pdf');
 require_once('vendor/autoload.php');
 use \PDFShift\PDFShift;
 
-PDFShift::setApiKey('120d8e8a86d2....................');
+PDFShift::setApiKey('your_api_key');
 
 // We use an instance of PDFShift instead of the ::convertTo to easily handle advanced configuration
 $pdfshift = new PDFShift();
@@ -179,7 +179,7 @@ $pdfshift->save('result.pdf');
 require_once('vendor/autoload.php');
 use \PDFShift\PDFShift;
 
-PDFShift::setApiKey('120d8e8a86d2....................');
+PDFShift::setApiKey('your_api_key');
 
 // We use an instance of PDFShift instead of the ::convertTo to easily handle advanced configuration
 $pdfshift = new PDFShift();
