@@ -150,8 +150,8 @@ PDFShift::setApiKey('your_api_key');
 $pdfshift = new PDFShift();
 $pdfshift->watermark([
     'image' => 'https://pdfshift.io/static/img/logo.png',
-    'offsetX' => 50,
-    'offsetY' => '100px',
+    'offset_x' => 50,
+    'offset_y' => '100px',
     'rotate' => 45
 ])
 $pdfshift->convert('https://www.example.com');
