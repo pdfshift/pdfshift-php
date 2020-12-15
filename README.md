@@ -1,3 +1,6 @@
+:warning: **PDFShift's API being simple to implement and use, we realized that using a custom library just to wrap a network library was not necessary.
+As such, we decided to close this package and we recommend you to use a network library such as `cURL` to communicate with PDFShift.**
+
 # PDFShift PHP Package
 
 This PHP package provides a simplified way to interact with the [PDFShift](https://pdfshift.io) API.
